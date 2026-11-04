@@ -1,0 +1,169 @@
+/* ---------- Winner cards ---------- */
+.winner-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.winner-grid--large {
+  gap: var(--space-8);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.winner-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.winner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+.winner-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-aubergine-700), var(--color-aubergine-900));
+}
+.winner-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 500ms var(--ease-out);
+}
+.winner-card:hover .winner-card__img {
+  transform: scale(1.04);
+}
+.winner-card__img--logo {
+  object-fit: contain;
+  object-position: center;
+  padding: 18%;
+}
+.winner-card__monogram {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--accent);
+}
+.winner-card__label {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  max-width: calc(100% - var(--space-6));
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: rgb(36 9 32 / 88%);
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+}
+.winner-card__body {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-6);
+}
+.winner-card__name {
+  font-size: var(--text-lg);
+  line-height: 1.2;
+}
+.winner-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 24px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.winner-card__team {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.winner-card__team span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.winner-card__crest {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  object-fit: contain;
+}
+.winner-card__flag {
+  width: 28px;
+  aspect-ratio: 4 / 3;
+  flex: none;
+  margin-left: auto;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 12%);
+}
+.winner-card__flag-code {
+  margin-left: auto;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.winner-card--large .winner-card__body {
+  padding: var(--space-6);
+}
+.winner-card--large .winner-card__name {
+  font-size: var(--text-xl);
+}
+.winner-card--large .winner-card__meta {
+  font-size: var(--text-base);
+}
+.winner-card--large .winner-card__label {
+  top: var(--space-4);
+  left: var(--space-4);
+  font-size: 0.72rem;
+}
+
+/* ---------- Flags and generated crests ---------- */
+.flag {
+  display: inline-block;
+  font-family: 'Twemoji Country Flags', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.flag-code {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+.winner-card__meta .flag,
+.winner-card__meta .flag-code {
+  margin-left: auto;
+  flex: none;
+}
+.crest-badge {
+  display: inline-grid;
+  place-content: center;
+  flex: none;
+  width: var(--crest-size, 24px);
+  height: var(--crest-size, 24px);
+  border-radius: 50%;
+  background: var(--color-aubergine);
+  color: var(--accent);
+  font-size: calc(var(--crest-size, 24px) * 0.36);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}

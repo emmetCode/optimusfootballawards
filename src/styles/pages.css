@@ -1,0 +1,65 @@
+.page-header {
+  background: var(--bg-brand);
+  color: var(--text-on-brand);
+  padding-block: var(--space-16) var(--space-12);
+}
+.page-header__eyebrow {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.page-header__title {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  color: #fff;
+}
+.page-header__lead {
+  max-width: 52ch;
+  margin: var(--space-4) 0 0;
+  color: var(--color-silver-200);
+}
+.page-header__extra {
+  margin-top: var(--space-8);
+}
+
+.section {
+  padding-block: var(--space-16);
+}
+.section--tight {
+  padding-block: var(--space-12) var(--space-24);
+}
+
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.section-heading__eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-aubergine-500);
+}
+.section-heading__title {
+  font-size: var(--text-2xl);
+}
+
+.page-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-12);
+}
+.page-actions .btn--outline:hover {
+  background: rgb(58 15 52 / 6%);
+}
+.section .btn--outline:hover {
+  background: rgb(58 15 52 / 6%);
+  border-color: var(--color-aubergine);
+}

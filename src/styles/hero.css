@@ -1,0 +1,109 @@
+.hero {
+  background: radial-gradient(
+    120% 90% at 85% 10%,
+    var(--color-aubergine-700) 0%,
+    var(--color-aubergine) 55%,
+    var(--color-aubergine-900) 100%
+  );
+  color: var(--text-on-brand);
+  overflow: hidden;
+}
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-16);
+  min-height: min(calc(100svh - var(--nav-height)), 820px);
+  padding-block: var(--space-16);
+}
+.hero__title {
+  max-width: 14ch;
+  margin-bottom: var(--space-6);
+  font-size: var(--text-hero);
+  color: #fff;
+  text-wrap: balance;
+}
+.hero__tagline {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--accent);
+}
+.hero__intro {
+  max-width: 38ch;
+  margin: 0 0 var(--space-8);
+  color: var(--color-silver-200);
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.hero__copy > * {
+  animation: rise 700ms var(--ease-out) both;
+}
+.hero__copy > :nth-child(2) {
+  animation-delay: 100ms;
+}
+.hero__copy > :nth-child(3) {
+  animation-delay: 200ms;
+}
+.hero__copy > :nth-child(4) {
+  animation-delay: 300ms;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 640px;
+  width: 100%;
+  justify-self: end;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 40%);
+  animation: rise 900ms var(--ease-out) 150ms both;
+}
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgb(234 170 0 / 35%);
+  pointer-events: none;
+}
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Shown until the dedicated award photograph is uploaded. Intentionally not trophy artwork. */
+.hero__fallback {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(60% 45% at 50% 35%, rgb(234 170 0 / 28%), transparent 70%),
+    linear-gradient(160deg, var(--color-aubergine-700), var(--color-aubergine-900));
+}
+
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    min-height: 0;
+    padding-block: var(--space-12);
+  }
+  .hero__media {
+    aspect-ratio: 4 / 3;
+    justify-self: stretch;
+  }
+}

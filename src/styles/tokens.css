@@ -1,0 +1,66 @@
+/* Design tokens: the single source of truth for colour, type, spacing. */
+:root {
+  /* Brand */
+  --color-silver: #dde3e8;
+  --color-aubergine: #3a0f34;
+  --color-marigold: #eaaa00;
+
+  /* Derived neutrals */
+  --color-aubergine-900: #240920;
+  --color-aubergine-700: #511a49;
+  --color-aubergine-500: #7a4f73;
+  --color-silver-50: #f6f8f9;
+  --color-silver-200: #c5cdd4;
+  --color-ink: #1d0a1a;
+  --color-ink-muted: #5d4a5a;
+
+  /* Semantic */
+  --bg-page: var(--color-silver-50);
+  --bg-surface: #ffffff;
+  --bg-brand: var(--color-aubergine);
+  --text-primary: var(--color-ink);
+  --text-muted: var(--color-ink-muted);
+  --text-on-brand: var(--color-silver);
+  --accent: var(--color-marigold);
+  --border-subtle: var(--color-silver-200);
+  --danger: #b3261e;
+  --success: #1e7a46;
+
+  /* Type */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-hero: clamp(2.5rem, 6vw, 5rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Shape and motion */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-card: 0 1px 2px rgb(36 9 32 / 8%), 0 8px 24px rgb(36 9 32 / 8%);
+  --shadow-card-hover: 0 2px 4px rgb(36 9 32 / 10%), 0 16px 40px rgb(36 9 32 / 16%);
+  --transition: 180ms ease;
+
+  --container-max: 1200px;
+}
+
+/* Stage 3 additions */
+:root {
+  --nav-height: 72px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
