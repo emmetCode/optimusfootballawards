@@ -11,7 +11,7 @@ Winners are managed from a protected admin dashboard, so no code or database edi
 | `/about`   | The award categories                                                                            |
 | `/seasons` | Season archive with a season selector and category filter                                       |
 | `/latest`  | The latest season's published winners                                                           |
-| `/admin`   | Protected dashboard: winners, seasons, categories, players and coaches, clubs and teams, images |
+
 
 ## Quick start
 
