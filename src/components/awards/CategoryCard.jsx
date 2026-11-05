@@ -176,15 +176,35 @@ const CATEGORY_IMAGES = {
   },
 };
 
+const PRIME_AWARD = {
+  tagline: 'The season’s defining player.',
+  description: [
+    'For the player whose impact for club and country defined the season.',
+    'The game’s most complete performer—and, quietly, its best player.',
+  ],
+  image: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Pele_con_brasil_%28cropped%29.jpg',
+    alt: 'Pelé with Brazil in 1970',
+    credit: 'El Gráfico',
+    license: 'Public domain',
+    licenseUrl: 'https://commons.wikimedia.org/wiki/Template:PD-1996',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Pele_con_brasil_(cropped).jpg',
+  },
+};
+
 export default function CategoryCard({ category }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const editorial = EDITORIAL_COPY[category.slug];
-  const image = CATEGORY_IMAGES[category.slug];
+  const isPrimeAward = /optimus[\s-]+prime/i.test(
+    `${category.slug} ${category.name} ${category.shortName}`
+  );
+  const editorial = isPrimeAward ? PRIME_AWARD : EDITORIAL_COPY[category.slug];
+  const image = isPrimeAward ? PRIME_AWARD.image : CATEGORY_IMAGES[category.slug];
   const group = editorial?.group ?? 'Season award';
   const tagline = editorial?.tagline ?? 'Excellence, recognised.';
   const description =
     editorial?.description ??
     `Recognising an outstanding ${category.winnerType} season in ${category.shortName}, and the performances, judgement and influence that made it exceptional.`;
+  const descriptionLines = Array.isArray(description) ? description : [description];
 
   return (
     <article className="award-editorial-row">
@@ -192,7 +212,9 @@ export default function CategoryCard({ category }) {
         <p className="award-editorial-row__eyebrow">The Optimus Awards <span>/</span> {group}</p>
         <h2 className="award-editorial-row__title">{category.name}</h2>
         <p className="award-editorial-row__tagline">{tagline}</p>
-        <p className="award-editorial-row__description">{description}</p>
+        <p className="award-editorial-row__description">
+          {descriptionLines.map((line) => <span key={line}>{line}</span>)}
+        </p>
       </div>
       <figure className="award-editorial-row__figure">
         <div className="award-editorial-row__image">

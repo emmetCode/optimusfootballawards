@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabaseClient.js';
 import { getImageUrl } from '../utils/imageUrl.js';
+import { getAwardCategoryName } from '../utils/awardCategory.js';
 
 // Converts a row from the published_winners view into the shape the UI uses.
 function toWinner(row) {
@@ -8,7 +9,7 @@ function toWinner(row) {
     id: row.record_id,
     seasonLabel: row.season_label,
     categorySlug: row.category_slug,
-    categoryName: row.category_name,
+    categoryName: getAwardCategoryName(row.category_slug, row.category_name),
     winnerType: row.winner_type,
     name: isTeam ? row.team_name : row.person_name,
     photoUrl: getImageUrl(row.photo_path),
@@ -29,21 +30,4 @@ export async function fetchSeasonWinners(seasonId) {
     .order('category_sort_order', { ascending: true });
   if (error) throw error;
   return data.map(toWinner);
-}
-
-// The pinned season wins even before it has published winners; otherwise the newest
-// season with published winners is selected by the latest_published_season view.
-export async function fetchLatestWinners() {
-  const { data: season, error } = await supabase
-    .from('latest_published_season')
-    .select('id, label, start_year')
-    .maybeSingle();
-  if (error) throw error;
-  if (!season) return { season: null, winners: [] };
-
-  const winners = await fetchSeasonWinners(season.id);
-  return {
-    season: { id: season.id, label: season.label, startYear: season.start_year },
-    winners,
-  };
 }

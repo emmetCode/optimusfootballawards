@@ -2,7 +2,6 @@ export const ROUTES = {
   home: '/',
   about: '/about',
   seasons: '/seasons',
-  latest: '/latest',
   admin: '/admin',
   adminLogin: '/admin/login',
 };

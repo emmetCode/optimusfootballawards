@@ -13,11 +13,8 @@ export default function Hero() {
           <h1 className="hero__title">{SITE_NAME}</h1>
           <p className="hero__slogan">Football’s finest in every position, recognised.</p>
           <div className="hero__actions">
-            <Button to={ROUTES.latest} variant="primary">
-              Latest winners
-            </Button>
-            <Button to={ROUTES.seasons} variant="outline">
-              Explore history
+            <Button to={ROUTES.seasons} variant="primary">
+              Explore past winners
             </Button>
           </div>
         </div>

@@ -5,8 +5,7 @@ import { ROUTES } from '../../constants/routes.js';
 const LINKS = [
   { to: ROUTES.home, label: 'Home', end: true },
   { to: ROUTES.about, label: 'The Awards' },
-  { to: ROUTES.seasons, label: 'History' },
-  { to: ROUTES.latest, label: 'Latest Winners' },
+  { to: ROUTES.seasons, label: 'Laureates' },
 ];
 
 export default function Navbar() {

@@ -265,37 +265,33 @@
 }
 
 .public-site .hero__media {
-  position: relative;
+  aspect-ratio: auto;
   width: min(100%, 430px);
-  max-height: 650px;
-  aspect-ratio: 2 / 3;
+  max-height: none;
   justify-self: end;
-  overflow: hidden;
-  border: 1px solid rgb(32 35 42 / 10%);
-  border-radius: var(--radius-md);
-  background: #efe2ba;
-  box-shadow: var(--shadow-card);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .public-site .hero__media::after {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgb(255 255 255 / 28%);
-  content: '';
-  pointer-events: none;
+  display: none;
 }
 
 .public-site .hero__image {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
 }
 
 .public-site .hero__fallback {
   display: grid;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 2 / 3;
   place-items: center;
   padding: 2rem;
   background:
@@ -394,6 +390,29 @@
 
 .public-site .page-header__extra {
   margin-top: 1.5rem;
+}
+
+.public-site .laureates-header {
+  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.public-site .laureates-header__title {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: linear-gradient(105deg, #4056a1 0%, #d79922 52%, #f13c20 100%);
+  background-clip: text;
+  color: #4056a1;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 10vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+  text-align: center;
+  text-wrap: balance;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .public-site .section {
@@ -508,6 +527,10 @@
   line-height: 1.8;
 }
 
+.public-site .award-editorial-row__description span {
+  display: block;
+}
+
 .public-site .award-editorial-row__figure {
   grid-area: image;
   min-width: 0;
@@ -592,21 +615,22 @@
 }
 
 .public-site .winner-card {
+  position: relative;
   min-width: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid #dedbd2;
-  border-radius: 2px;
+  border: 1px solid #e0dfd9;
+  border-radius: 6px;
   background: var(--bg-surface);
-  box-shadow: none;
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  box-shadow: 0 3px 12px rgb(32 35 42 / 5%);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 
 .public-site .winner-card:hover {
-  transform: translateY(-3px);
-  border-color: #b6bfdc;
-  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-5px);
+  border-color: #aeb8d5;
+  box-shadow: 0 14px 30px rgb(32 35 42 / 13%);
 }
 
 .public-site .winner-card__media {
@@ -647,20 +671,41 @@
 }
 
 .public-site .winner-card__label {
-  position: absolute;
-  top: 0.7rem;
-  left: 0.7rem;
-  max-width: min(18rem, calc(100% - 1.4rem));
-  padding: 0.45rem 0.6rem;
+  position: static;
+  display: inline-flex;
+  align-self: flex-start;
+  max-width: 100%;
+  margin-top: auto;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid #d9deeb;
   border-left: 3px solid #d79922;
-  border-radius: 0;
-  background: rgb(32 35 42 / 88%);
-  color: #fffefa;
-  font-size: 0.68rem;
+  border-radius: 3px;
+  background: rgb(64 86 161 / 5%);
+  color: #293b70;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.055em;
   line-height: 1.35;
   overflow-wrap: anywhere;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, backdrop-filter 180ms ease;
+}
+
+.public-site .winner-card:hover .winner-card__label {
+  position: absolute;
+  z-index: 2;
+  top: 0.8rem;
+  right: 0.8rem;
+  left: 0.8rem;
+  width: fit-content;
+  max-width: calc(100% - 1.6rem);
+  border-color: rgb(41 59 112 / 16%);
+  border-left-color: #d79922;
+  border-radius: 5px;
+  background: rgb(248 246 240 / 78%);
+  color: #202c54;
+  box-shadow: 0 4px 16px rgb(32 35 42 / 12%);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
 }
 
 .public-site .winner-card__body {
@@ -668,8 +713,9 @@
   min-width: 0;
   flex: 1;
   flex-direction: column;
-  gap: 0.7rem;
-  padding: 0.95rem 1rem 1rem;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1rem 1rem 1.1rem;
 }
 
 .public-site .winner-card__name {
@@ -681,10 +727,11 @@
 
 .public-site .winner-card__meta {
   display: flex;
+  width: 100%;
   min-width: 0;
-  min-height: 24px;
+  min-height: 32px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.6rem;
   color: #555b66;
   font-size: 0.8rem;
@@ -692,12 +739,14 @@
 
 .public-site .winner-card__team {
   display: flex;
+  flex: 1;
   min-width: 0;
   align-items: center;
   gap: 0.5rem;
 }
 
 .public-site .winner-card__team > span {
+  min-width: 0;
   overflow: hidden;
   overflow-wrap: anywhere;
   text-overflow: ellipsis;
@@ -710,12 +759,23 @@
   object-fit: contain;
 }
 
-.public-site .winner-card__flag {
-  width: 25px;
-  height: auto;
+.public-site .winner-card__country {
+  display: inline-flex;
+  width: 28px;
+  height: 22px;
   flex: none;
   margin-left: auto;
-  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.public-site .winner-card__country.flag-code {
+  width: auto;
+  height: auto;
+  min-height: 22px;
+  padding: 0.1rem 0.35rem;
 }
 
 .public-site .winner-card__flag-code,
@@ -727,17 +787,6 @@
   border-radius: 2px;
   font-size: 0.68rem;
   letter-spacing: 0.03em;
-}
-
-.public-site .winner-card__season {
-  margin: auto 0 0;
-  padding-top: 0.6rem;
-  border-top: 1px solid #ebe8e0;
-  color: #687080;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .public-site .winner-card--large .winner-card__body {
@@ -821,61 +870,35 @@
   transform: translateY(-70%) rotate(45deg);
 }
 
-.public-site .season-archive__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 145px), 1fr));
-  gap: 0.65rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+.public-site .season-archive__controls {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #d9d7d0;
 }
 
-.public-site .season-option {
+.public-site .season-archive__select {
   display: grid;
-  min-width: 0;
-  min-height: 82px;
-  align-content: space-between;
+  width: min(100%, 21rem);
   gap: 0.45rem;
-  padding: 0.8rem 0.9rem;
-  border: 1px solid #dedbd2;
-  border-bottom: 2px solid #dedbd2;
-  border-radius: 2px;
-  background: var(--bg-surface);
-  color: var(--text-primary);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
-.public-site .season-option:hover {
-  border-color: #aeb8d5;
-}
-
-.public-site .season-option.is-selected {
-  border-color: #4056a1;
-  border-bottom-color: #4056a1;
-  background: rgb(64 86 161 / 5%);
-}
-
-.public-site .season-option__eyebrow {
-  color: #687080;
-  font-size: 0.62rem;
+.public-site .season-archive__select > span {
+  color: #4056a1;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1.3;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.public-site .season-option.is-selected .season-option__eyebrow {
-  color: #4056a1;
-}
-
-.public-site .season-option__label {
-  overflow-wrap: anywhere;
-  font-family: var(--font-display);
-  font-size: 1.4rem;
+.public-site .season-archive__select select {
+  min-height: 52px;
+  border-color: #aeb8d5;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgb(32 35 42 / 5%);
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1;
 }
 
 .public-site .season-results__header {
@@ -899,15 +922,17 @@
 }
 
 .public-site .season-archive__skeleton {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 145px), 1fr));
-  gap: 0.65rem;
-  margin-bottom: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #d9d7d0;
 }
 
 .public-site .season-archive__skeleton span {
-  min-height: 82px;
-  border-radius: 2px;
+  width: min(100%, 21rem);
+  height: 52px;
+  border-radius: 3px;
 }
 
 /* States, flags and fallback badges */
@@ -1163,8 +1188,6 @@
 
   .public-site .hero__media {
     width: min(100%, 430px);
-    max-height: none;
-    aspect-ratio: 2 / 3;
     justify-self: center;
   }
 
@@ -1241,16 +1264,18 @@
   }
 
   .public-site .winner-card__body {
-    gap: 0.5rem;
-    padding: 0.7rem;
+    gap: 0.45rem;
+    padding: 0.75rem;
   }
 
   .public-site .winner-card__label {
-    top: 0.45rem;
-    left: 0.45rem;
-    max-width: calc(100% - 0.9rem);
-    padding: 0.35rem 0.45rem;
-    font-size: 0.59rem;
+    font-size: 0.55rem;
+  }
+
+  .public-site .winner-card:hover .winner-card__label {
+    top: 0.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
   }
 
   .public-site .winner-card__name,
@@ -1259,12 +1284,7 @@
   }
 
   .public-site .winner-card__meta {
-    align-items: flex-start;
     font-size: 0.7rem;
-  }
-
-  .public-site .winner-card__team {
-    align-items: flex-start;
   }
 
   .public-site .winner-card__crest {
@@ -1272,27 +1292,10 @@
     height: 20px;
   }
 
-  .public-site .winner-card__flag {
-    width: 21px;
-  }
-
-  .public-site .winner-card__season {
-    padding-top: 0.45rem;
-    font-size: 0.59rem;
-  }
-
-  .public-site .season-archive__list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
-  }
-
-  .public-site .season-option {
-    min-height: 74px;
-    padding: 0.7rem;
-  }
-
-  .public-site .season-option__label {
-    font-size: 1.25rem;
+  .public-site .winner-card__country {
+    width: 24px;
+    height: 20px;
+    font-size: 1rem;
   }
 
   .public-site .page-header__extra .controls,

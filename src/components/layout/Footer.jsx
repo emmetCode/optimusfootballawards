@@ -9,8 +9,7 @@ export default function Footer() {
         <Link to={ROUTES.home} className="footer__name">{SITE_NAME}</Link>
         <nav className="footer__nav" aria-label="Footer">
           <Link to={ROUTES.about}>The Awards</Link>
-          <Link to={ROUTES.seasons}>History</Link>
-          <Link to={ROUTES.latest}>Latest Winners</Link>
+          <Link to={ROUTES.seasons}>Laureates</Link>
         </nav>
         <span className="footer__copy">© {new Date().getFullYear()}</span>
       </div>

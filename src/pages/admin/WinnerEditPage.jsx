@@ -270,12 +270,12 @@ function WinnerEditor({ data }) {
             )}
 
             <ImageUpload
-              label={isTeamAward ? 'Team photograph (optional)' : 'Photograph for this season (optional)'}
+              label={isTeamAward ? 'Team image (optional)' : 'Photograph for this season (optional)'}
               value={photoPath}
               onChange={setPhotoPath}
               folder={isTeamAward ? 'clubs' : 'people'}
               disabled={saving}
-              hint={isTeamAward ? 'The club logo is shown if no photograph is added.' : 'If empty, the person’s profile photograph is used.'}
+              hint={isTeamAward ? 'Upload a separate team image here; the club logo is uploaded in the team details above.' : 'If empty, the person’s profile photograph is used.'}
             />
           </>
         )}

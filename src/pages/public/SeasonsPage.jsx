@@ -1,23 +1,18 @@
 import { useSearchParams } from 'react-router-dom';
-import PageHeader from '../../components/ui/PageHeader.jsx';
 import AsyncBoundary from '../../components/ui/AsyncBoundary.jsx';
 import EmptyState from '../../components/ui/EmptyState.jsx';
 import ErrorState from '../../components/ui/ErrorState.jsx';
-import Button from '../../components/ui/Button.jsx';
-import CategoryFilter from '../../components/awards/CategoryFilter.jsx';
 import WinnerGrid from '../../components/awards/WinnerGrid.jsx';
 import WinnerSkeletonGrid from '../../components/awards/WinnerSkeletonGrid.jsx';
 import { useSeasonOptions } from '../../hooks/useSeasons.js';
 import { useSeasonWinners } from '../../hooks/useWinners.js';
-import { useCategories } from '../../hooks/useCategories.js';
 import { usePageTitle } from '../../hooks/usePageTitle.js';
 
 export default function SeasonsPage() {
-  usePageTitle('History');
+  usePageTitle('Laureates');
   const [params, setParams] = useSearchParams();
 
   const options = useSeasonOptions();
-  const categories = useCategories();
 
   const seasons = options.data?.seasons ?? [];
   const requestedYear = Number(params.get('season'));
@@ -27,36 +22,27 @@ export default function SeasonsPage() {
     seasons.find((season) => season.id === options.data?.latestId) ??
     seasons[0] ??
     null;
-  const categorySlug = params.get('category') ?? '';
   const winnersState = useSeasonWinners(selected?.id ?? null);
 
-  function updateParam(key, value) {
+  function selectSeason(startYear) {
     const next = new URLSearchParams(params);
-    if (value) next.set(key, value);
-    else next.delete(key);
+    next.set('season', String(startYear));
+    next.delete('category');
     setParams(next, { replace: true });
   }
 
   return (
     <>
-      <PageHeader eyebrow="The archive" title="History" lead="Explore published awards by season.">
-        {(categories.data?.length ?? 0) > 0 && (
-          <div className="controls">
-            <CategoryFilter
-              categories={categories.data}
-              value={categorySlug}
-              onChange={(slug) => updateParam('category', slug)}
-            />
-          </div>
-        )}
-      </PageHeader>
+      <header className="page-header laureates-header">
+        <div className="container">
+          <h1 className="laureates-header__title">Roll of Honour</h1>
+        </div>
+      </header>
       <section className="section section--tight season-archive">
         <div className="container">
           {options.status === 'loading' ? (
             <div className="season-archive__skeleton" role="status" aria-label="Loading seasons">
-              {Array.from({ length: 5 }, (_, index) => (
-                <span key={index} className="skeleton" aria-hidden="true" />
-              ))}
+              <span className="skeleton" aria-hidden="true" />
             </div>
           ) : options.status === 'error' ? (
             <ErrorState error={options.error} onRetry={options.reload} />
@@ -64,25 +50,21 @@ export default function SeasonsPage() {
             <EmptyState title="No seasons yet" message="Seasons will appear here once they are added." />
           ) : (
             <>
-              <div className="season-archive__list" role="group" aria-label="Choose a season">
-                {seasons.map((season) => {
-                  const isLatest = season.id === options.data?.latestId;
-                  const isSelected = season.id === selected?.id;
-                  return (
-                    <button
-                      key={season.id}
-                      type="button"
-                      className={`season-option${isSelected ? ' is-selected' : ''}`}
-                      aria-pressed={isSelected}
-                      onClick={() => updateParam('season', String(season.startYear))}
-                    >
-                      <span className="season-option__eyebrow">
-                        {isLatest ? 'Latest season' : 'Season'}
-                      </span>
-                      <span className="season-option__label">{season.label}</span>
-                    </button>
-                  );
-                })}
+              <div className="season-archive__controls">
+                <label className="select season-archive__select">
+                  <span>Choose a season</span>
+                  <select
+                    value={selected?.startYear ?? ''}
+                    onChange={(event) => selectSeason(event.target.value)}
+                    aria-label="Choose a season"
+                  >
+                    {seasons.map((season) => (
+                      <option key={season.id} value={season.startYear}>
+                        {season.label}{season.id === options.data?.latestId ? ' · Latest' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
 
               {selected && (
@@ -106,24 +88,7 @@ export default function SeasonsPage() {
                       />
                     }
                   >
-                    {(winners) => {
-                      const visible = categorySlug
-                        ? winners.filter((winner) => winner.categorySlug === categorySlug)
-                        : winners;
-                      return visible.length > 0 ? (
-                        <WinnerGrid winners={visible} />
-                      ) : (
-                        <EmptyState
-                          title="No winner in this category"
-                          message="Try another category or season."
-                          action={
-                            <Button variant="outline" onClick={() => updateParam('category', '')}>
-                              Show all categories
-                            </Button>
-                          }
-                        />
-                      );
-                    }}
+                    {(winners) => <WinnerGrid winners={winners} />}
                   </AsyncBoundary>
                 </>
               )}

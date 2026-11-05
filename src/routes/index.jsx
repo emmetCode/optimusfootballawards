@@ -5,7 +5,6 @@ import FullPageLoader from '../components/ui/FullPageLoader.jsx';
 import HomePage from '../pages/public/HomePage.jsx';
 import AboutPage from '../pages/public/AboutPage.jsx';
 import SeasonsPage from '../pages/public/SeasonsPage.jsx';
-import LatestPage from '../pages/public/LatestPage.jsx';
 import NotFoundPage from '../pages/public/NotFoundPage.jsx';
 import { ROUTES } from '../constants/routes.js';
 
@@ -20,7 +19,6 @@ export default function AppRoutes() {
         <Route path={ROUTES.home} element={<HomePage />} />
         <Route path={ROUTES.about} element={<AboutPage />} />
         <Route path={ROUTES.seasons} element={<SeasonsPage />} />
-        <Route path={ROUTES.latest} element={<LatestPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 

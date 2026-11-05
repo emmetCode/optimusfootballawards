@@ -17,7 +17,6 @@ export default function WinnerCard({ winner, size = 'default' }) {
   const {
     name,
     categoryName,
-    seasonLabel,
     winnerType,
     photoUrl,
     teamName,
@@ -49,7 +48,6 @@ export default function WinnerCard({ winner, size = 'default' }) {
             {initials(name)}
           </span>
         )}
-        <span className="winner-card__label">{categoryName}</span>
       </div>
 
       <div className="winner-card__body">
@@ -71,9 +69,9 @@ export default function WinnerCard({ winner, size = 'default' }) {
               <span>{teamName}</span>
             </span>
           )}
-          <Flag iso={countryIso} name={countryName} />
+          <Flag iso={countryIso} name={countryName} className="winner-card__country" />
         </div>
-        {seasonLabel && <p className="winner-card__season">{seasonLabel}</p>}
+        <span className="winner-card__label">{categoryName}</span>
       </div>
     </article>
   );
