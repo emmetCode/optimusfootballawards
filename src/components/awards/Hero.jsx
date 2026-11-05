@@ -23,8 +23,8 @@ export default function Hero() {
           {!imageFailed ? (
             <img
               className="hero__image"
-              src="/images/OFA-award.png"
-              alt="The Optimus Football Awards trophy"
+              src="/images/ofa_trophy_ribbon_512.webp"
+              alt="Animated Optimus Football Awards trophy with a flowing ribbon"
               fetchpriority="high"
               onError={() => setImageFailed(true)}
             />
